@@ -10,10 +10,7 @@ async function bootstrap() {
   app.useGlobalPipes(new ValidationPipe({ whitelist: true }));
   app.enableCors({
     credentials: true,
-    origin: [
-      'http://localhost:3000',
-      'https://frontend-todo-nextjs.vercel.app',
-    ],
+    origin: ['http://localhost:3000', 'https://nextjs-todo-eight.vercel.app/'],
   });
   app.use(cookieParser());
   app.use(
