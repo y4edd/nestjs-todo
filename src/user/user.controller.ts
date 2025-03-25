@@ -4,6 +4,7 @@ import { Request } from 'express';
 import { UserService } from './user.service';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { User } from '@prisma/client';
+import { AuthUser } from './interfaces/user.interface';
 
 @UseGuards(AuthGuard('jwt'))
 @Controller('user')
@@ -20,6 +21,7 @@ export class UserController {
     @Req() req: Request,
     @Body() dto: UpdateUserDto,
   ): Promise<Omit<User, 'hashedPassword'>> {
-    return this.userService.updateUser(req.user.id, dto);
+    const user = req.user as AuthUser;
+    return this.userService.updateUser(user.id, dto);
   }
 }
